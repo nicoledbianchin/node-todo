@@ -27,13 +27,13 @@ module.exports = function (app) {
                 todo: req.body.todo,
                 isDone: req.body.isDone,
                 hasAttachment: req.body.hasAttachment
-            }, function (erro, todo) {
+            }, function (err, todo) {
                 if (err) throw err;
                 res.send('Success');
             });
         } else {
             var newTodo = Todos({
-                username: 'test',
+                username: req.body.username,
                 todo: req.body.todo,
                 isDone: req.body.isDone,
                 hasAttachment: req.body.hasAttachment
