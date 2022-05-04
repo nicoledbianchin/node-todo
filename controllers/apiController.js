@@ -19,5 +19,28 @@ module.exports = function (app) {
 
             res.send(todo);
         });
+    });
+
+    app.post('/api/todo', function (req, res) {
+        if (req.body.id) {
+            Todos.findByIdAndUpdate(req.body.id, {
+                todo: req.body.todo,
+                isDone: req.body.isDone,
+                hasAttachment: req.body.hasAttachment
+            }, function (erro, todo) {
+                if (err) throw err;
+                res.send('Success');
+            });
+        } else {
+            var newTodo = Todos({
+                username: 'test',
+                todo: req.body.todo,
+                isDone: req.body.isDone,
+                hasAttachment: req.body.hasAttachment
+            });
+            newTodo.save(function (err) {
+                res.send('Success');
+            });
+        }
     })
 }
